@@ -1,8 +1,8 @@
 import "reflect-metadata";
+import { createTypeormConn } from "./utils/createTypeormConnection";
 import { GraphQLServer } from "graphql-yoga";
 import { importSchema } from "graphql-import";
 import { resolvers } from "./resolvers";
-import { createConnection } from "typeorm";
 import * as path from "path";
 
 export const startServer = async () => {
@@ -11,7 +11,8 @@ export const startServer = async () => {
 
   //Create a connection to the database
   //Connection parameters are picked up from TYPEORM config
-  await createConnection().then(() => {});
+  // await createConnection().then(() => {});
+  await createTypeormConn();
   await server.start();
   console.log("Server is running on localhost:4000");
 };
